@@ -1,0 +1,6 @@
+ClassConneX Test Document:
+This is a sample document file containing dummy lecture notes for testing the document management module of ClassConneX.
+Subject: Computer Networks
+Subject Code: CS-602
+Category: Lecture Notes
+Uploaded by: Class Representative (CR)

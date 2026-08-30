@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "_id": "seed-cr-id-12345",
+      "name": "Class Representative",
+      "email": "cr@classconnex.com",
+      "password": "$2a$10$W1wQe5KoxFhR8UaZix0qO.e7wI9ZJqN.9h1G/13d11D8Y4rK4/7kK",
+      "role": "cr",
+      "rollNumber": "CR2026001",
+      "createdAt": "2026-06-14T07:11:10.799Z"
+    }
+  ],
+  "notices": [
+    {
+      "_id": "welcome-notice-id",
+      "title": "Welcome to ClassConneX!",
+      "content": "This is the central notice board for all assignments, deadlines, events, and document updates. Class Representatives can post and manage details here.",
+      "category": "announcement",
+      "createdAt": "2026-06-14T07:11:10.799Z",
+      "createdBy": {
+        "name": "System Admin"
+      }
+    }
+  ],
+  "documents": []
+}
