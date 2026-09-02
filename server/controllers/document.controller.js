@@ -17,7 +17,7 @@ const formatBytes = (bytes, decimals = 2) => {
 const getDocuments = async (req, res) => {
   try {
     const documents = await Document.find({});
-    res.json(documents);
+    res.json(documents || []);
   } catch (error) {
     console.error('Error fetching documents:', error);
     res.status(500).json({ message: 'Server error fetching documents' });
@@ -43,6 +43,8 @@ const uploadDocument = async (req, res) => {
     const fileName = req.file.originalname;
     const fileSize = formatBytes(req.file.size);
 
+    const userId = (req.user._id || req.user.id).toString();
+
     const docData = {
       title,
       description: description || '',
@@ -53,7 +55,7 @@ const uploadDocument = async (req, res) => {
       fileName,
       fileSize,
       uploadedBy: {
-        _id: req.user.id.toString(),
+        _id: userId,
         name: req.user.name
       }
     };
@@ -66,26 +68,72 @@ const uploadDocument = async (req, res) => {
   }
 };
 
-// @desc    Delete a document (CR only)
-// @route   DELETE /api/documents/:id
-// @access  Private (CR)
-const deleteDocument = async (req, res) => {
+// @desc    Update a document (CR uploader only)
+// @route   PUT /api/documents/:id
+// @access  Private (CR uploader)
+const updateDocument = async (req, res) => {
   const { id } = req.params;
+  const { title, description, subjectName, subjectCode, category } = req.body;
 
   try {
-    const document = await Document.findByIdAndDelete(id);
+    const document = await Document.findById(id);
     if (!document) {
       return res.status(404).json({ message: 'Document not found' });
     }
 
+    const uploaderId = document.uploadedBy ? (document.uploadedBy._id || document.uploadedBy.id) : null;
+    const currentUserId = (req.user._id || req.user.id).toString();
+
+    if (uploaderId && uploaderId.toString() !== currentUserId) {
+      return res.status(403).json({ message: 'Unauthorized: Only the uploader can edit this document' });
+    }
+
+    const updateData = {};
+    if (title) updateData.title = title;
+    if (description !== undefined) updateData.description = description;
+    if (subjectName) updateData.subjectName = subjectName;
+    if (subjectCode) updateData.subjectCode = subjectCode;
+    if (category) updateData.category = category;
+
+    const updated = await Document.findByIdAndUpdate(id, updateData);
+    res.json(updated || { ...document, ...updateData });
+  } catch (error) {
+    console.error('Error updating document:', error);
+    res.status(500).json({ message: 'Server error updating document' });
+  }
+};
+
+// @desc    Delete a document (CR uploader only)
+// @route   DELETE /api/documents/:id
+// @access  Private (CR uploader)
+const deleteDocument = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const document = await Document.findById(id);
+    if (!document) {
+      return res.status(404).json({ message: 'Document not found' });
+    }
+
+    const uploaderId = document.uploadedBy ? (document.uploadedBy._id || document.uploadedBy.id) : null;
+    const currentUserId = (req.user._id || req.user.id).toString();
+
+    if (uploaderId && uploaderId.toString() !== currentUserId) {
+      return res.status(403).json({ message: 'Unauthorized: Only the uploader can delete this document' });
+    }
+
+    await Document.findByIdAndDelete(id);
+
     // Clean up uploaded file
-    const filename = document.fileUrl.replace('/uploads/', '');
-    const filepath = path.join(__dirname, '../uploads', filename);
-    if (fs.existsSync(filepath)) {
-      try {
-        fs.unlinkSync(filepath);
-      } catch (fileErr) {
-        console.error('Failed to delete physical file:', fileErr.message);
+    if (document.fileUrl) {
+      const filename = document.fileUrl.replace('/uploads/', '');
+      const filepath = path.join(__dirname, '../uploads', filename);
+      if (fs.existsSync(filepath)) {
+        try {
+          fs.unlinkSync(filepath);
+        } catch (fileErr) {
+          console.error('Failed to delete physical file:', fileErr.message);
+        }
       }
     }
 
@@ -96,4 +144,4 @@ const deleteDocument = async (req, res) => {
   }
 };
 
-module.exports = { getDocuments, uploadDocument, deleteDocument };
+module.exports = { getDocuments, uploadDocument, updateDocument, deleteDocument };
