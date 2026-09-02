@@ -26,20 +26,12 @@ app.use(express.urlencoded({ extended: true }));
 const uploadsPath = path.join(__dirname, 'uploads');
 app.use('/uploads', express.static(uploadsPath));
 
-// Fallback handler for missing uploaded files to prevent "Cannot GET /uploads/..." error
+// 404 handler for missing uploaded files
 app.use('/uploads/*', (req, res) => {
   const reqPath = req.params[0];
   const targetPath = path.join(uploadsPath, reqPath);
-
   if (!fs.existsSync(targetPath)) {
-    const filename = path.basename(reqPath);
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
-
-    const pdfBuffer = Buffer.from(
-      `%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R >>\nendobj\n4 0 obj\n<< /Length 85 >>\nstream\nBT\n/F1 14 Tf\n50 700 Td\n(ClassConneX Resource Document: ${filename}) Tj\nET\nendstream\nendobj\nxref\n0 5\n0000000000 65535 f \n0000000009 00000 n \n0000000058 00000 n \n0000000115 00000 n \n0000000202 00000 n \ntrailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n337\n%%EOF`
-    );
-    return res.send(pdfBuffer);
+    return res.status(404).json({ message: `File not found: ${path.basename(reqPath)}` });
   }
 });
 

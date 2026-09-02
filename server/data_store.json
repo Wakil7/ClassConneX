@@ -22,38 +22,5 @@
       }
     }
   ],
-  "documents": [
-    {
-      "_id": "doc_sample_1",
-      "title": "Unit 1 Notes — Data Structures & Algorithms",
-      "description": "Comprehensive notes covering Arrays, Linked Lists, Stacks, and Queues with solved examples.",
-      "subjectName": "Data Structures",
-      "subjectCode": "CS2201",
-      "category": "notes",
-      "fileUrl": "/uploads/dummy/ds_unit1_notes.pdf",
-      "fileName": "DS_Unit1_Notes.pdf",
-      "fileSize": "2.4 MB",
-      "uploadedBy": {
-        "_id": "seed-cr-id-12345",
-        "name": "Class Representative"
-      },
-      "createdAt": "2026-08-25T10:00:00.000Z"
-    },
-    {
-      "_id": "doc_sample_2",
-      "title": "Database Management Systems — SQL Cheat Sheet",
-      "description": "Quick reference guide for DDL, DML, JOINS, and Normalization rules.",
-      "subjectName": "Database Management Systems",
-      "subjectCode": "CS2203",
-      "category": "study_material",
-      "fileUrl": "/uploads/dummy/dbms_sql_cheatsheet.pdf",
-      "fileName": "DBMS_SQL_CheatSheet.pdf",
-      "fileSize": "1.8 MB",
-      "uploadedBy": {
-        "_id": "seed-cr-id-12345",
-        "name": "Class Representative"
-      },
-      "createdAt": "2026-08-28T14:30:00.000Z"
-    }
-  ]
+  "documents": []
 }
