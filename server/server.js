@@ -31,7 +31,7 @@ app.use('/uploads/*', (req, res) => {
   const reqPath = req.params[0];
   const targetPath = path.join(uploadsPath, reqPath);
   if (!fs.existsSync(targetPath)) {
-    return res.status(404).json({ message: `File not found: ${path.basename(reqPath)}` });
+    return res.status(404).json({ message: 'File not found: ' + path.basename(reqPath) });
   }
 });
 
@@ -39,6 +39,7 @@ app.use('/uploads/*', (req, res) => {
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/notices', require('./routes/notice.routes'));
 app.use('/api/documents', require('./routes/document.routes'));
+app.use('/api/colleges', require('./routes/college.routes'));
 
 // Basic health check route
 app.get('/api/health', (req, res) => {

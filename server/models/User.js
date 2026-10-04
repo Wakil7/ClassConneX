@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+﻿const mongoose = require('mongoose');
 const { getFallbackMode, fallbackDB } = require('../config/db');
 
 const UserSchema = new mongoose.Schema({
@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: { type: String, enum: ['student', 'cr'], default: 'student' },
   rollNumber: { type: String, required: true },
+  institution: { type: String, default: 'National Institute of Technology Tiruchirappalli (NIT Trichy)' },
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -30,6 +31,7 @@ const FallbackUser = {
     const data = fallbackDB.read();
     const newUser = {
       _id: 'user_' + Math.random().toString(36).substr(2, 9),
+      institution: userData.institution || 'National Institute of Technology Tiruchirappalli (NIT Trichy)',
       ...userData,
       createdAt: new Date().toISOString()
     };

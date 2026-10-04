@@ -2,13 +2,40 @@ const Notice = require('../models/Notice');
 const fs = require('fs');
 const path = require('path');
 
-// @desc    Get all notices
+// @desc    Get all notices (scoped by college & global announcements)
 // @route   GET /api/notices
 // @access  Private
 const getNotices = async (req, res) => {
   try {
-    const notices = await Notice.find({});
-    res.json(notices);
+    const { scope, category } = req.query;
+    const userInstitution = req.user ? req.user.institution : null;
+
+    let filter = {};
+
+    if (scope === 'campus') {
+      if (userInstitution) {
+        filter.institution = userInstitution;
+      }
+    } else if (scope === 'global') {
+      filter.isGlobal = true;
+    } else {
+      // Default: show notices that are global OR belong to user's college
+      if (userInstitution) {
+        filter = {
+          $or: [
+            { isGlobal: true },
+            { institution: userInstitution }
+          ]
+        };
+      }
+    }
+
+    if (category && category !== 'all') {
+      filter.category = category;
+    }
+
+    const notices = await Notice.find(filter);
+    res.json(notices || []);
   } catch (error) {
     console.error('Error fetching notices:', error);
     res.status(500).json({ message: 'Server error fetching notices' });
@@ -19,7 +46,7 @@ const getNotices = async (req, res) => {
 // @route   POST /api/notices
 // @access  Private (CR)
 const createNotice = async (req, res) => {
-  const { title, content, category, deadlineDate, eventDate } = req.body;
+  const { title, content, category, deadlineDate, eventDate, isGlobal, institution } = req.body;
 
   try {
     if (!title || !content || !category) {
@@ -34,10 +61,15 @@ const createNotice = async (req, res) => {
       fileName = req.file.originalname;
     }
 
+    const userInstitution = institution || (req.user && req.user.institution) || 'National Institute of Technology Tiruchirappalli (NIT Trichy)';
+    const noticeIsGlobal = isGlobal === 'true' || isGlobal === true;
+
     const noticeData = {
       title,
       content,
       category,
+      institution: userInstitution,
+      isGlobal: noticeIsGlobal,
       deadlineDate: deadlineDate || null,
       eventDate: eventDate || null,
       fileUrl,
@@ -70,7 +102,6 @@ const deleteNotice = async (req, res) => {
 
     // Clean up uploaded file if it exists
     if (notice.fileUrl) {
-      // fileUrl is "/uploads/filename", we want to get "uploads/filename" relative to server directory
       const filename = notice.fileUrl.replace('/uploads/', '');
       const filepath = path.join(__dirname, '../uploads', filename);
       if (fs.existsSync(filepath)) {

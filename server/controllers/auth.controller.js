@@ -1,7 +1,9 @@
-const bcrypt = require('bcryptjs');
+﻿const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { getFallbackMode, fallbackDB } = require('../config/db');
+
+const DEFAULT_INSTITUTION = 'National Institute of Technology Tiruchirappalli (NIT Trichy)';
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET || 'classconnex_super_secret_jwt_key_12345', {
@@ -13,7 +15,7 @@ const generateToken = (id) => {
 // @route   POST /api/auth/register
 // @access  Public
 const registerUser = async (req, res) => {
-  const { name, email, password, rollNumber, crSecret } = req.body;
+  const { name, email, password, rollNumber, institution, crSecret } = req.body;
 
   try {
     if (!name || !email || !password || !rollNumber) {
@@ -37,12 +39,14 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create user
+    const selectedInstitution = institution && institution.trim().length > 0 ? institution.trim() : DEFAULT_INSTITUTION;
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
       role,
-      rollNumber
+      rollNumber,
+      institution: selectedInstitution
     });
 
     res.status(201).json({
@@ -51,6 +55,7 @@ const registerUser = async (req, res) => {
       email: user.email,
       role: user.role,
       rollNumber: user.rollNumber,
+      institution: user.institution || selectedInstitution,
       token: generateToken(user._id)
     });
   } catch (error) {
@@ -87,6 +92,7 @@ const loginUser = async (req, res) => {
       email: user.email,
       role: user.role,
       rollNumber: user.rollNumber,
+      institution: user.institution || DEFAULT_INSTITUTION,
       token: generateToken(user._id)
     });
   } catch (error) {
@@ -111,7 +117,7 @@ const getMe = async (req, res) => {
 // @route   PUT /api/auth/profile
 // @access  Private
 const updateProfile = async (req, res) => {
-  const { name, rollNumber, email } = req.body;
+  const { name, rollNumber, email, institution } = req.body;
   try {
     const userId = req.user._id || req.user.id;
     let updatedUser = null;
@@ -122,6 +128,7 @@ const updateProfile = async (req, res) => {
       if (name) user.name = name;
       if (rollNumber) user.rollNumber = rollNumber;
       if (email) user.email = email;
+      if (institution) user.institution = institution;
       await user.save();
       updatedUser = user;
     } else {
@@ -131,6 +138,7 @@ const updateProfile = async (req, res) => {
         if (name) data.users[idx].name = name;
         if (rollNumber) data.users[idx].rollNumber = rollNumber;
         if (email) data.users[idx].email = email;
+        if (institution) data.users[idx].institution = institution;
         fallbackDB.write(data);
         updatedUser = data.users[idx];
       }
@@ -146,6 +154,7 @@ const updateProfile = async (req, res) => {
       email: updatedUser.email,
       role: updatedUser.role,
       rollNumber: updatedUser.rollNumber,
+      institution: updatedUser.institution || DEFAULT_INSTITUTION,
       token: generateToken(updatedUser._id)
     });
   } catch (error) {

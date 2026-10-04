@@ -11,12 +11,47 @@ const formatBytes = (bytes, decimals = 2) => {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 };
 
-// @desc    Get all documents
+// @desc    Get all documents (with college/scope filtering)
 // @route   GET /api/documents
 // @access  Private
 const getDocuments = async (req, res) => {
   try {
-    const documents = await Document.find({});
+    const { scope, institution, category } = req.query;
+    const userInstitution = req.user ? req.user.institution : null;
+
+    let filter = {};
+
+    if (scope === 'campus' || scope === 'my_college') {
+      // Only documents belonging to the user's institution
+      if (userInstitution) {
+        filter.institution = userInstitution;
+      }
+    } else if (scope === 'global') {
+      // Global hub: all public documents
+      filter.isPublic = true;
+      if (institution && institution !== 'all') {
+        filter.institution = institution;
+      }
+    } else {
+      // Default: show documents that are public OR belong to user's college
+      if (userInstitution) {
+        filter = {
+          $or: [
+            { isPublic: true },
+            { institution: userInstitution }
+          ]
+        };
+      }
+      if (institution && institution !== 'all') {
+        filter.institution = institution;
+      }
+    }
+
+    if (category && category !== 'all') {
+      filter.category = category;
+    }
+
+    const documents = await Document.find(filter);
     res.json(documents || []);
   } catch (error) {
     console.error('Error fetching documents:', error);
@@ -28,7 +63,7 @@ const getDocuments = async (req, res) => {
 // @route   POST /api/documents
 // @access  Private (CR)
 const uploadDocument = async (req, res) => {
-  const { title, description, subjectName, subjectCode, category } = req.body;
+  const { title, description, subjectName, subjectCode, category, institution, isPublic } = req.body;
 
   try {
     if (!title || !subjectName || !subjectCode || !category) {
@@ -44,6 +79,8 @@ const uploadDocument = async (req, res) => {
     const fileSize = formatBytes(req.file.size);
 
     const userId = (req.user._id || req.user.id).toString();
+    const userInstitution = institution || (req.user && req.user.institution) || 'National Institute of Technology Tiruchirappalli (NIT Trichy)';
+    const documentIsPublic = isPublic === undefined ? true : (isPublic === 'true' || isPublic === true);
 
     const docData = {
       title,
@@ -51,6 +88,8 @@ const uploadDocument = async (req, res) => {
       subjectName,
       subjectCode,
       category,
+      institution: userInstitution,
+      isPublic: documentIsPublic,
       fileUrl,
       fileName,
       fileSize,
@@ -73,7 +112,7 @@ const uploadDocument = async (req, res) => {
 // @access  Private (CR uploader)
 const updateDocument = async (req, res) => {
   const { id } = req.params;
-  const { title, description, subjectName, subjectCode, category } = req.body;
+  const { title, description, subjectName, subjectCode, category, isPublic } = req.body;
 
   try {
     const document = await Document.findById(id);
@@ -94,6 +133,7 @@ const updateDocument = async (req, res) => {
     if (subjectName) updateData.subjectName = subjectName;
     if (subjectCode) updateData.subjectCode = subjectCode;
     if (category) updateData.category = category;
+    if (isPublic !== undefined) updateData.isPublic = (isPublic === 'true' || isPublic === true);
 
     const updated = await Document.findByIdAndUpdate(id, updateData);
     res.json(updated || { ...document, ...updateData });

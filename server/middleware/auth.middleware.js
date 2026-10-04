@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+﻿const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const protect = async (req, res, next) => {
@@ -17,10 +17,12 @@ const protect = async (req, res, next) => {
 
       req.user = {
         id: user._id,
+        _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
-        rollNumber: user.rollNumber
+        rollNumber: user.rollNumber,
+        institution: user.institution || 'National Institute of Technology Tiruchirappalli (NIT Trichy)'
       };
 
       next();

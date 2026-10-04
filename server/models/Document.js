@@ -7,6 +7,8 @@ const DocumentSchema = new mongoose.Schema({
   subjectName: { type: String, required: true },
   subjectCode: { type: String, required: true },
   category: { type: String, enum: ['notes', 'assignment', 'study_material', 'pyq'], default: 'notes' },
+  institution: { type: String, required: true, default: 'National Institute of Technology Tiruchirappalli (NIT Trichy)' },
+  isPublic: { type: Boolean, default: true },
   fileUrl: { type: String, required: true },
   fileName: { type: String, required: true },
   fileSize: { type: String },
@@ -20,9 +22,23 @@ const DocumentSchema = new mongoose.Schema({
 const MongooseDocument = mongoose.model('Document', DocumentSchema);
 
 const FallbackDocument = {
-  find: async () => {
+  find: async (query = {}) => {
     const data = fallbackDB.read();
-    const docs = data.documents || [];
+    let docs = data.documents || [];
+    
+    // Support filtering in fallback mode
+    if (query['$or']) {
+      docs = docs.filter(d => {
+        return query['$or'].some(clause => {
+          return Object.keys(clause).every(k => d[k] === clause[k]);
+        });
+      });
+    } else {
+      Object.keys(query).forEach(k => {
+        docs = docs.filter(d => d[k] === query[k]);
+      });
+    }
+
     return [...docs].sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
   },
   findById: async (id) => {
@@ -35,6 +51,8 @@ const FallbackDocument = {
     if (!data.documents) data.documents = [];
     const newDoc = {
       _id: 'doc_' + Math.random().toString(36).substr(2, 9),
+      institution: docData.institution || 'National Institute of Technology Tiruchirappalli (NIT Trichy)',
+      isPublic: docData.isPublic !== undefined ? docData.isPublic : true,
       ...docData,
       createdAt: new Date().toISOString()
     };
@@ -69,7 +87,7 @@ const FallbackDocument = {
 module.exports = {
   find: async (query = {}) => {
     if (getFallbackMode()) {
-      return await FallbackDocument.find();
+      return await FallbackDocument.find(query);
     }
     return await MongooseDocument.find(query).sort({ createdAt: -1 });
   },
