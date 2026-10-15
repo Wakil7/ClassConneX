@@ -1,49 +1,52 @@
 {
   "users": [
     {
-      "_id": "seed-cr-id-12345",
-      "name": "Class Representative",
+      "name": "Class Representative (NIT Trichy)",
       "email": "cr@classconnex.com",
-      "password": "$2a$10$BSrbEIDvWvQR8T3UrbYrMeOxd8aMvvkT/sMi4SWvadL/NC.so5Wlq",
+      "password": "$2a$10$7DHshZ.wcBJXXqxwZQzxH.cxbc3rlKRxmXejxdqELP45AGU6ZhtL.",
       "role": "cr",
-      "rollNumber": "CR2026001",
+      "rollNumber": "106121001",
       "institution": "National Institute of Technology Tiruchirappalli (NIT Trichy)",
-      "createdAt": "2026-10-04T14:23:38.117Z"
+      "createdAt": "2026-09-01T08:00:00.000Z",
+      "_id": "6acfb3169c30247d5843bb96",
+      "__v": 0
     },
     {
-      "_id": "seed-cr-iitb",
-      "name": "Aarav Sharma (IITB CR)",
+      "name": "Aarav Sharma (IIT Bombay CR)",
       "email": "cr.iitb@classconnex.com",
-      "password": "$2a$10$BSrbEIDvWvQR8T3UrbYrMeOxd8aMvvkT/sMi4SWvadL/NC.so5Wlq",
+      "password": "$2a$10$7DHshZ.wcBJXXqxwZQzxH.cxbc3rlKRxmXejxdqELP45AGU6ZhtL.",
       "role": "cr",
       "rollNumber": "23B030012",
       "institution": "Indian Institute of Technology Bombay (IIT Bombay)",
-      "createdAt": "2026-10-04T14:23:38.129Z"
+      "createdAt": "2026-09-01T08:00:00.000Z",
+      "_id": "6acfb3169c30247d5843bb98",
+      "__v": 0
     },
     {
-      "_id": "user_qthjtp3bu",
-      "institution": "Indian Institute of Technology Bombay (IIT Bombay)",
-      "name": "IIT Student Test",
-      "email": "test_1791124556352@iitb.ac.in",
-      "password": "$2a$10$skSp2HTN57kN82JPI6u0l.RxovQYj0pmq3hBG8/OeJZ7kqBLQK1ru",
-      "role": "student",
-      "rollNumber": "IITB2026",
-      "createdAt": "2026-10-04T14:35:57.099Z"
+      "name": "Kunal Mehra (IIT Delhi CR)",
+      "email": "cr.iitd@classconnex.com",
+      "password": "$2a$10$7DHshZ.wcBJXXqxwZQzxH.cxbc3rlKRxmXejxdqELP45AGU6ZhtL.",
+      "role": "cr",
+      "rollNumber": "2023CS10450",
+      "institution": "Indian Institute of Technology Delhi (IIT Delhi)",
+      "createdAt": "2026-09-01T08:00:00.000Z",
+      "_id": "6acfb3169c30247d5843bb9a",
+      "__v": 0
     },
     {
-      "_id": "user_ack4pkx2d",
-      "institution": "Indian Institute of Technology Bombay (IIT Bombay)",
-      "name": "IIT Student Test",
-      "email": "test_1791124587088@iitb.ac.in",
-      "password": "$2a$10$4G2N6.Oa6I5F47avXu7.cuprwfbDw8hNdlICahw0OrqBueETLabEe",
-      "role": "student",
-      "rollNumber": "IITB2026",
-      "createdAt": "2026-10-04T14:36:27.252Z"
+      "name": "Pooja Hegde (NIT Surathkal CR)",
+      "email": "cr.nitk@classconnex.com",
+      "password": "$2a$10$7DHshZ.wcBJXXqxwZQzxH.cxbc3rlKRxmXejxdqELP45AGU6ZhtL.",
+      "role": "cr",
+      "rollNumber": "221EC145",
+      "institution": "National Institute of Technology Karnataka, Surathkal (NIT Surathkal)",
+      "createdAt": "2026-09-01T08:00:00.000Z",
+      "_id": "6acfb3169c30247d5843bb9c",
+      "__v": 0
     }
   ],
   "notices": [
     {
-      "_id": "notice-global-1",
       "title": "🏆 All-India Inter IIT & NIT CodeSprint 2026 Open!",
       "content": "Annual nationwide hackathon for all IITs, NITs, and premier engineering institutions. Teams of 2-4 can register until end of month. Exciting prizes & summer internships!",
       "category": "event",
@@ -51,149 +54,155 @@
       "isGlobal": true,
       "deadlineDate": "2026-11-15T18:30:00.000Z",
       "eventDate": "2026-11-20T09:00:00.000Z",
-      "createdAt": "2026-10-04T12:23:38.129Z",
       "createdBy": {
-        "_id": "seed-cr-id-12345",
+        "_id": "6acfb3169c30247d5843bb96",
         "name": "National Coordinator"
-      }
+      },
+      "createdAt": "2026-10-14T08:00:00.000Z"
     },
     {
-      "_id": "notice-nitt-1",
       "title": "NIT Trichy: Mid-Term Examination Schedule Announced",
-      "content": "The mid-semester examination timetable for all departments has been published on the Octa portal. Please check your subject slots and hall allocations.",
+      "content": "The mid-semester examination timetable has been published for all B.Tech / MCA departments. Check seating arrangements on portal.",
       "category": "announcement",
       "institution": "National Institute of Technology Tiruchirappalli (NIT Trichy)",
       "isGlobal": false,
       "deadlineDate": "2026-10-25T17:00:00.000Z",
-      "createdAt": "2026-10-04T08:23:38.129Z",
       "createdBy": {
-        "_id": "seed-cr-id-12345",
-        "name": "Class Representative"
-      }
+        "_id": "6acfb3169c30247d5843bb96",
+        "name": "Class Representative (NIT Trichy)"
+      },
+      "createdAt": "2026-10-13T10:00:00.000Z"
     },
     {
-      "_id": "notice-iitb-1",
-      "title": "IIT Bombay: Techfest Campus Ambassador Registrations",
-      "content": "Call for student volunteers and campus leads for Asia's largest science and technology festival.",
+      "title": "OS Lab Assignment 4 Due Date Reminder",
+      "content": "Submit POSIX thread synchronization code and execution logs via ClassConneX Documents Hub before 11:59 PM.",
+      "category": "deadline",
+      "institution": "National Institute of Technology Tiruchirappalli (NIT Trichy)",
+      "isGlobal": false,
+      "deadlineDate": "2026-10-22T23:59:00.000Z",
+      "createdBy": {
+        "_id": "6acfb3169c30247d5843bb96",
+        "name": "Class Representative (NIT Trichy)"
+      },
+      "createdAt": "2026-10-12T11:30:00.000Z"
+    },
+    {
+      "title": "IIT Bombay: Techfest Campus Ambassador Call 2026",
+      "content": "Calling all student innovators and campus ambassadors across India for Asia's largest science and technology festival.",
       "category": "event",
       "institution": "Indian Institute of Technology Bombay (IIT Bombay)",
-      "isGlobal": false,
-      "deadlineDate": "2026-11-01T23:59:00.000Z",
-      "createdAt": "2026-10-04T02:23:38.129Z",
+      "isGlobal": true,
+      "deadlineDate": "2026-11-05T23:59:00.000Z",
+      "eventDate": "2026-12-18T10:00:00.000Z",
       "createdBy": {
-        "_id": "seed-cr-iitb",
-        "name": "Aarav Sharma (IITB CR)"
-      }
+        "_id": "6acfb3169c30247d5843bb98",
+        "name": "Aarav Sharma (IIT Bombay CR)"
+      },
+      "createdAt": "2026-10-11T12:00:00.000Z"
     }
   ],
   "documents": [
     {
-      "_id": "doc-nitt-1",
-      "title": "Database Management Systems (DBMS) - Complete Unit 1 to 5 Notes",
-      "description": "Detailed handwritten lecture notes covering ER diagrams, Relational Algebra, SQL, Normalization (1NF to BCNF), and Concurrency Control.",
+      "title": "Database Management Systems (DBMS) - Complete Unit 1 to 3 Lecture Notes",
+      "description": "Comprehensive handwritten & typed lecture notes covering ER diagrams, Relational Algebra, SQL, and Normalization up to BCNF.",
       "subjectName": "Database Management Systems",
       "subjectCode": "CS2203",
       "category": "notes",
       "institution": "National Institute of Technology Tiruchirappalli (NIT Trichy)",
       "isPublic": true,
-      "fileUrl": "/uploads/dbms_complete_notes.pdf",
-      "fileName": "DBMS_Unit_1_to_5_Complete.pdf",
-      "fileSize": "4.8 MB",
+      "fileUrl": "/uploads/NIT_Trichy_CS2203_DBMS_Notes.pdf",
+      "fileName": "NIT_Trichy_CS2203_DBMS_Notes.pdf",
+      "fileSize": "3 Pages • 6.2 KB",
       "uploadedBy": {
-        "_id": "seed-cr-id-12345",
-        "name": "Class Representative"
+        "_id": "6acfb3169c30247d5843bb96",
+        "name": "Class Representative (NIT Trichy)"
       },
-      "createdAt": "2026-10-03T14:23:38.129Z"
+      "createdAt": "2026-10-12T09:30:00.000Z"
     },
     {
-      "_id": "doc-nitt-2",
-      "title": "NITT Operating Systems Lab Manual & Practice Problems",
-      "description": "Department internal lab manual with POSIX thread exercises, scheduling algorithms in C, and semaphore implementations.",
+      "title": "NIT Trichy OS Lab Manual - IPC, POSIX Threads & Deadlock Avoidance",
+      "description": "Department lab manual with producer-consumer mutex synchronization and Banker's algorithm implementation assignments.",
       "subjectName": "Operating Systems Lab",
       "subjectCode": "CS2205",
       "category": "assignment",
       "institution": "National Institute of Technology Tiruchirappalli (NIT Trichy)",
-      "isPublic": false,
-      "fileUrl": "/uploads/nitt_os_lab_manual.pdf",
-      "fileName": "OS_Lab_Manual_NITT.pdf",
-      "fileSize": "2.1 MB",
+      "isPublic": true,
+      "fileUrl": "/uploads/NIT_Trichy_CS2205_OS_Lab_Manual.pdf",
+      "fileName": "NIT_Trichy_CS2205_OS_Lab_Manual.pdf",
+      "fileSize": "2 Pages • 4.0 KB",
       "uploadedBy": {
-        "_id": "seed-cr-id-12345",
-        "name": "Class Representative"
+        "_id": "6acfb3169c30247d5843bb96",
+        "name": "Class Representative (NIT Trichy)"
       },
-      "createdAt": "2026-10-02T14:23:38.129Z"
+      "createdAt": "2026-10-10T14:15:00.000Z"
     },
     {
-      "_id": "doc-iitb-1",
-      "title": "Advanced Algorithms & Complexity (IIT Bombay CS601)",
-      "description": "Comprehensive lecture slides & problem sets by Prof. at CSE IIT Bombay. Covers NP-Completeness, Approximation Algorithms & Linear Programming.",
+      "title": "Advanced Algorithms & Complexity Theory - Master Theorem & NP-Completeness",
+      "description": "Prof. lecture slides from IIT Bombay CSE Department. Covers dynamic programming, Max-Flow Min-Cut, and 3-SAT reductions.",
       "subjectName": "Advanced Algorithms",
       "subjectCode": "CS601",
       "category": "notes",
       "institution": "Indian Institute of Technology Bombay (IIT Bombay)",
       "isPublic": true,
-      "fileUrl": "/uploads/iitb_advanced_algorithms.pdf",
-      "fileName": "IITB_CS601_Algorithms_Notes.pdf",
-      "fileSize": "7.2 MB",
+      "fileUrl": "/uploads/IIT_Bombay_CS601_Advanced_Algorithms.pdf",
+      "fileName": "IIT_Bombay_CS601_Advanced_Algorithms.pdf",
+      "fileSize": "3 Pages • 5.4 KB",
       "uploadedBy": {
-        "_id": "seed-cr-iitb",
-        "name": "Aarav Sharma (IITB CR)"
+        "_id": "6acfb3169c30247d5843bb98",
+        "name": "Aarav Sharma (IIT Bombay CR)"
       },
-      "createdAt": "2026-10-03T20:23:38.129Z"
+      "createdAt": "2026-10-08T11:00:00.000Z"
     },
     {
-      "_id": "doc-iitb-2",
-      "title": "IIT Bombay End-Semester PYQs (2021-2025): Machine Learning",
-      "description": "Previous 5 years end-sem examination question papers with detailed step-by-step solutions for Deep Learning and Classical ML.",
+      "title": "IIT Bombay CS725 Machine Learning End-Semester Solved PYQs (2022-2025)",
+      "description": "Full solutions for past 4 years end-sem exams: Ridge/Lasso derivations, soft-margin SVM duals, and backprop step-by-step.",
       "subjectName": "Machine Learning & AI",
       "subjectCode": "CS725",
       "category": "pyq",
       "institution": "Indian Institute of Technology Bombay (IIT Bombay)",
       "isPublic": true,
-      "fileUrl": "/uploads/iitb_ml_pyqs_sol.pdf",
-      "fileName": "IITB_CS725_ML_PYQ_Solved.pdf",
-      "fileSize": "5.4 MB",
+      "fileUrl": "/uploads/IIT_Bombay_CS725_ML_PYQs_Solved.pdf",
+      "fileName": "IIT_Bombay_CS725_ML_PYQs_Solved.pdf",
+      "fileSize": "3 Pages • 5.3 KB",
       "uploadedBy": {
-        "_id": "seed-cr-iitb",
-        "name": "Aarav Sharma (IITB CR)"
+        "_id": "6acfb3169c30247d5843bb98",
+        "name": "Aarav Sharma (IIT Bombay CR)"
       },
-      "createdAt": "2026-10-03T08:23:38.129Z"
+      "createdAt": "2026-10-06T16:45:00.000Z"
     },
     {
-      "_id": "doc-iitd-1",
-      "title": "Distributed Systems & Cloud Computing Architectures",
-      "description": "Lecture notes and system design case studies on Raft, Paxos, Kafka, and distributed consensus from IIT Delhi COL733.",
-      "subjectName": "Cloud Computing & Systems",
+      "title": "Cloud Computing Architectures & Raft Consensus Protocol Notes",
+      "description": "IIT Delhi COL733 course summary covering Lamport clocks, Chandy-Lamport snapshots, and Raft consensus leader election.",
+      "subjectName": "Distributed Systems & Cloud",
       "subjectCode": "COL733",
       "category": "study_material",
       "institution": "Indian Institute of Technology Delhi (IIT Delhi)",
       "isPublic": true,
-      "fileUrl": "/uploads/iitd_col733_distributed_systems.pdf",
-      "fileName": "IITDelhi_COL733_DistributedSystems.pdf",
-      "fileSize": "6.1 MB",
+      "fileUrl": "/uploads/IIT_Delhi_COL733_Cloud_Distributed_Systems.pdf",
+      "fileName": "IIT_Delhi_COL733_Cloud_Distributed_Systems.pdf",
+      "fileSize": "2 Pages • 3.4 KB",
       "uploadedBy": {
-        "_id": "seed-cr-iitd",
-        "name": "Kunal Mehra (IITD)"
+        "_id": "6acfb3169c30247d5843bb9a",
+        "name": "Kunal Mehra (IIT Delhi CR)"
       },
-      "createdAt": "2026-10-02T12:23:38.129Z"
+      "createdAt": "2026-10-04T10:20:00.000Z"
     },
     {
-      "_id": "doc-nits-1",
-      "title": "Computer Networks Endsem Solved PYQ Collection (2022-2025)",
-      "description": "Past university question papers solved: Subnetting, TCP flow control, BGP routing, Cryptography.",
-      "subjectName": "Computer Networks",
-      "subjectCode": "CS304",
+      "title": "Signals & Systems Mid-Semester Solved Question Bank with Derivations",
+      "description": "NITK Surathkal ECE department solved exam question papers on convolution integrals, LTI impulse response, and Laplace ROC.",
+      "subjectName": "Signals and Systems",
+      "subjectCode": "EC204",
       "category": "pyq",
       "institution": "National Institute of Technology Karnataka, Surathkal (NIT Surathkal)",
       "isPublic": true,
-      "fileUrl": "/uploads/nitk_networks_pyq.pdf",
-      "fileName": "NITK_Surathkal_Networks_PYQs.pdf",
-      "fileSize": "3.7 MB",
+      "fileUrl": "/uploads/NIT_Surathkal_EC204_Signals_Systems_PYQ.pdf",
+      "fileName": "NIT_Surathkal_EC204_Signals_Systems_PYQ.pdf",
+      "fileSize": "2 Pages • 3.6 KB",
       "uploadedBy": {
-        "_id": "seed-cr-nitk",
-        "name": "Aditi Rao (NITK)"
+        "_id": "6acfb3169c30247d5843bb9c",
+        "name": "Pooja Hegde (NIT Surathkal CR)"
       },
-      "createdAt": "2026-10-01T14:23:38.129Z"
+      "createdAt": "2026-10-02T13:00:00.000Z"
     }
   ]
 }
